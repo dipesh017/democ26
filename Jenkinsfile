@@ -8,8 +8,19 @@ pipeline {
     }
 
     stage('unit cases') {
-      steps {
-        sh 'npm test'
+      parallel {
+        stage('unit cases') {
+          steps {
+            sh 'npm test'
+          }
+        }
+
+        stage('windows testing') {
+          steps {
+            sleep 3
+          }
+        }
+
       }
     }
 
